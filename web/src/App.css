@@ -159,6 +159,13 @@ a {
   text-align: right;
 }
 
+.redirect-container {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+}
+
 @media screen and (max-width: 500px) {
   .flex-input {
     grid-template-columns: 1fr;

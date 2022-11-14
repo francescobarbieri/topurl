@@ -6,6 +6,7 @@ import Home from './Home'
 import Login from './Login';
 import PrivateRoute from './PrivateRoute';
 import ForgotPassword from './ForgotPassword';
+import Redirect from './Redirect';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login />} />
             <Route path="/forgotpassword" element={<ForgotPassword />} />
+            <Route path="*" element={<Redirect />} />
           </Routes>
         </AuthProvider>
       </Router>

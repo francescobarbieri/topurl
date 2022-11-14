@@ -1,4 +1,5 @@
 import { TextField, Button, Typography } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
 import { useRef, useState } from 'react';
 import { useAuth } from './contexts/authContext';
 import { Link, useNavigate } from 'react-router-dom';
@@ -40,7 +41,7 @@ const Signup = () => {
             await signup(emailRef.current.value, passwordRef.current.value);
             navigate("/");
         } catch(e) {
-            console.log(JSON.stringify(e))
+            // console.log(JSON.stringify(e))
 
             switch(JSON.parse(JSON.stringify(e)).code) {
                 case 'auth/email-already-in-use':
@@ -79,10 +80,12 @@ const Signup = () => {
                     </div>
                     <Typography variant="h4" component="h1" className="slogan">Create new account</Typography>
                     <TextField
+                        required
                         label="E-mail"
                         inputRef={emailRef}
                         className='full-width'
                         autoComplete="off"
+                        disabled={loading}
                         error={ emailError.error ? true : false}
                         helperText={ emailError.error ? emailError.helperText : ''}
                         onChange={ () => {
@@ -93,23 +96,27 @@ const Signup = () => {
                     <br/>
                     <div className="flex-input">
                         <TextField
+                            required
                             label="Password"
                             inputRef={passwordRef}
                             className='sbs-inputs'
                             type="password"
                             autoComplete="off"
+                            disabled={loading}
                             error={ passwordError.error ? true : false}
                             helperText={ passwordError.error ? passwordError.helperText : ''}
                             onChange={ () => {
                                 setPasswordError({error: false, helperText: ''})
                             }}
                         />
-                        <TextField 
+                        <TextField
+                            required
                             label="Confirm"
                             inputRef={confirmPswRef}
                             className='sbs-inputs'
                             autoComplete="off"
                             type="password"
+                            disabled={loading}
                             error={ confirmError.error ? true : false}
                             helperText={ confirmError.error ? confirmError.helperText : ''}
                             onChange={ () => {
@@ -124,7 +131,12 @@ const Signup = () => {
                     <br/>
                     <div className="button-container">
                         <Link to="/login"><Button variant="outlined">Login instead</Button></Link>
-                        <Button onClick={handleSubmit} variant="contained">Create</Button>
+                        <LoadingButton
+                            onClick={handleSubmit}
+                            variant="contained"
+                            loading={loading}
+                        >Create
+                        </LoadingButton>
                     </div>
                 </div>
                 <div className='sidebar'>
