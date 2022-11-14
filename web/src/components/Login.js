@@ -28,17 +28,13 @@ const Login = () => {
             await login(emailRef.current.value, passwordRef.current.value);
             navigate("/");
         } catch(e) {
-            console.log(JSON.stringify(e));
-            // email già esistente
+            // console.log(JSON.stringify(e));
             // email invalida
             // email troppo lunga
             // password invalida
             // user not found
 
             switch(JSON.parse(JSON.stringify(e)).code) {
-                case 'auth/email-already-exists':
-                    setEmailError({ error: true, helperText: 'User is already registered' });
-                    break;
                 case 'auth/invalid-email':
                     setEmailError({ error: true, helperText: 'Invalid e-mail' });
                     break;
@@ -83,12 +79,12 @@ const Login = () => {
                         label="E-mail"
                         inputRef={emailRef}
                         className='full-width'
+                        autoComplete="off"
                         error={ emailError.error ? true : false}
                         helperText={ emailError.error ? emailError.helperText : ''}
                         onChange={ () => {
                             setEmailError({error: false, helperText: ''})
                         }}
-                        autoComplete="off"
                     />
                     <br/><br/>
                     <TextField
