@@ -13,7 +13,8 @@ const Login = () => {
     const emailRef = useRef();
     const passwordRef = useRef();
     const { login, currentUser } = useAuth();
-    const [error, setError] = useState('');
+    const [emailError, setEmailError] = useState({});
+    const [passwordError, setPasswordError] = useState({});
     const [loading, setLoading] = useState(false);
 
     const navigate = useNavigate();
@@ -22,12 +23,39 @@ const Login = () => {
         e.preventDefault();
 
         try {
-            setError('');
+            setEmailError({});
             setLoading(true);
             await login(emailRef.current.value, passwordRef.current.value);
             navigate("/");
-        } catch {
-            setError('Failed to create sign in')
+        } catch(e) {
+            console.log(JSON.stringify(e));
+            // email già esistente
+            // email invalida
+            // email troppo lunga
+            // password invalida
+            // user not found
+
+            switch(JSON.parse(JSON.stringify(e)).code) {
+                case 'auth/email-already-exists':
+                    setEmailError({ error: true, helperText: 'User is already registered' });
+                    break;
+                case 'auth/invalid-email':
+                    setEmailError({ error: true, helperText: 'Invalid e-mail' });
+                    break;
+                case 'auth/invalid-password':
+                    setPasswordError({ error: true, helperText: 'Invalid password' });
+                    break;
+                case 'auth/user-not-found':
+                    setEmailError({ error: true, helperText: 'User not found' });
+                    break;
+                case 'auth/internal-error':
+                    setPasswordError({ error: true, helperText: 'Missing password' });
+                    break;
+                default:
+                    setEmailError({ error: true, helperText: 'Generic error' });
+                    setPasswordError({ error: true, helperText: 'Generic error' });
+                    break;
+            }
         }
         setLoading(false);
     }
@@ -51,8 +79,30 @@ const Login = () => {
                             <hr></hr>
                         </div>
                     </div>
-                    <TextField label="E-mail" inputRef={emailRef} className='full-width'/> <br/><br/>
-                    <TextField label="Password" inputRef={passwordRef} className='full-width margin-30' />
+                    <TextField
+                        label="E-mail"
+                        inputRef={emailRef}
+                        className='full-width'
+                        error={ emailError.error ? true : false}
+                        helperText={ emailError.error ? emailError.helperText : ''}
+                        onChange={ () => {
+                            setEmailError({error: false, helperText: ''})
+                        }}
+                        autoComplete="off"
+                    />
+                    <br/><br/>
+                    <TextField
+                        label="Password"
+                        inputRef={passwordRef}
+                        className='full-width margin-30'
+                        autoComplete="off"
+                        type="password"
+                        error={ passwordError.error ? true : false}
+                        helperText={ passwordError.error ? passwordError.helperText : ''}
+                        onChange={ () => {
+                            setPasswordError({error: false, helperText: ''})
+                        }}
+                    />
                     <br/>
                     <div className="button-container">
                         <Link to="/signup"><Button variant="outlined">Signup instead</Button></Link>
