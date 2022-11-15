@@ -3,6 +3,7 @@ import { LoadingButton } from '@mui/lab';
 import { useRef, useState } from 'react';
 import { useAuth } from './contexts/authContext';
 import { Link, useNavigate } from 'react-router-dom';
+import Footer from './Footer';
 
 const Signup = () => {
 
@@ -81,6 +82,7 @@ const Signup = () => {
                     <Typography variant="h4" component="h1" className="slogan">Create new account</Typography>
                     <TextField
                         required
+                        size="small"
                         label="E-mail"
                         inputRef={emailRef}
                         className='full-width'
@@ -97,6 +99,7 @@ const Signup = () => {
                     <div className="flex-input">
                         <TextField
                             required
+                            size="small"
                             label="Password"
                             inputRef={passwordRef}
                             className='sbs-inputs'
@@ -111,6 +114,7 @@ const Signup = () => {
                         />
                         <TextField
                             required
+                            size="small"
                             label="Confirm"
                             inputRef={confirmPswRef}
                             className='sbs-inputs'
@@ -144,30 +148,7 @@ const Signup = () => {
                     <Typography variant="h6" component="p" className='main-img-descr'>"Where the shorter,<br/>the better."</Typography>
                 </div>
             </div>
-            <div className='footer'>
-                <hr className='footer-bar'></hr>
-                <div className='footer-container'>
-                    <div className='footer-main'>
-                        <a href="#" className='footer-link'>
-                            <Typography variant="body2" component="p">About</Typography>
-                        </a>
-                        <a href="#" className='footer-link'>
-                            <Typography variant="body2" component="p">Security</Typography>
-                        </a>
-                        <a href="#" className='footer-link'>
-                            <Typography variant="body2" component="p">Chrome Extension</Typography>
-                        </a>
-                        <a href="#" className='footer-link'>
-                            <Typography variant="body2" component="p">Mobile App</Typography>
-                        </a>
-                        <a target="_blank" href="https://github.com/francescobarbieri/topurl" className='footer-link'>
-                            <Typography variant="body2" component="p">GitHub</Typography>
-                        </a>
-                    </div>
-                    <div className='footer-logout'>
-                    </div>
-                </div>
-            </div>
+            <Footer />
         </div>
     );
 }

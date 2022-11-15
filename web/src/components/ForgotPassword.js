@@ -1,12 +1,11 @@
 import { useState, useRef } from 'react';
 import { Button, Typography, TextField, Alert } from '@mui/material';
+import LoadingButton from '@mui/lab/LoadingButton';
 import { useAuth } from './contexts/authContext';
 import { Link } from 'react-router-dom';
+import Footer from './Footer';
 
 const ForgotPassword = () => {
-
-    // to-do:
-    // adding an alert to let ppl know that the mail has been sent and they need to check their inbox
 
     const emailRef = useRef();
     const { resetPassword, currentUser } = useAuth();
@@ -61,7 +60,10 @@ const ForgotPassword = () => {
                     : '' }
                     <TextField
                         required
+                        size="small"
+                        autoComplete="off"
                         label="E-mail"
+                        disabled={loading}
                         inputRef={emailRef}
                         className='full-width'
                         error={ emailError.error ? true : false }
@@ -75,7 +77,12 @@ const ForgotPassword = () => {
                     <br/>
                     <div className="button-container">
                         <Link to="/"><Button variant="outlined">Go back</Button></Link>
-                        <Button onClick={handleSubmit} variant="contained">Reset password</Button>
+                        <LoadingButton 
+                            onClick={handleSubmit}
+                            variant="contained"
+                            loading={loading}
+                        >Reset password
+                        </LoadingButton >
                     </div>
                 </div>
                 <div className='sidebar'>
@@ -83,30 +90,7 @@ const ForgotPassword = () => {
                     <Typography variant="h6" component="p" className='main-img-descr'>"Where the shorter,<br/>the better."</Typography>
                 </div>
             </div>
-            <div className='footer'>
-                <hr className='footer-bar'></hr>
-                <div className='footer-container'>
-                    <div className='footer-main'>
-                        <a href="#" className='footer-link'>
-                            <Typography variant="body2" component="p">About</Typography>
-                        </a>
-                        <a href="#" className='footer-link'>
-                            <Typography variant="body2" component="p">Security</Typography>
-                        </a>
-                        <a href="#" className='footer-link'>
-                            <Typography variant="body2" component="p">Chrome Extension</Typography>
-                        </a>
-                        <a href="#" className='footer-link'>
-                            <Typography variant="body2" component="p">Mobile App</Typography>
-                        </a>
-                        <a target="_blank" href="https://github.com/francescobarbieri/topurl" className='footer-link'>
-                            <Typography variant="body2" component="p">GitHub</Typography>
-                        </a>
-                    </div>
-                    <div className='footer-logout'>
-                    </div>
-                </div>
-            </div>
+            <Footer />
         </div>
     );
 }

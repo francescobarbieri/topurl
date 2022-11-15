@@ -35,6 +35,10 @@ a {
   text-decoration: none;
 }
 
+.clickable {
+  cursor: pointer !important;
+}
+
 /* end helper */
 
 .container {
