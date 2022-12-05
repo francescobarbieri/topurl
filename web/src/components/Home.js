@@ -3,6 +3,7 @@ import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import Footer from './Footer';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useState, useRef } from 'react';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
 
@@ -98,7 +99,7 @@ const Home = () => {
                         <p className="logo-topurl-txt">TopURL</p>
                     </div>
                     <Typography variant="h4" component="h1" className="slogan">Short your link now!</Typography>
-                    <Typography variant="h6" component="h3">Paste your link here! 👇🏻​</Typography>
+                    <Typography variant="h6" component="h3">Paste your link here: ​</Typography>
                     <br/>
                     <TextField
                         autoFocus={true}
@@ -116,7 +117,7 @@ const Home = () => {
                     <br/>
                     <Accordion
                         disableGutters={true}
-                        elevation={2}
+                        elevation={1}
                         onChange={ () => {
                             setOpenAccordion(!openAccordion)
                         }}
@@ -125,7 +126,7 @@ const Home = () => {
                             aria-controls="panel1d-content"
                             expandIcon={<ExpandMoreIcon />}
                         >
-                            <Typography variant='body1' component='p'>Show { !openAccordion ? 'more' : 'less'} options</Typography>
+                            <Typography sx={{color: 'rgba(0,0,0, 0.60)'}} variant='body1' component='p'>Show { !openAccordion ? 'more' : 'less'} options</Typography>
                         </AccordionSummary>
                         <AccordionDetails>
                         <div className="flex-input">
@@ -190,7 +191,9 @@ const Home = () => {
                     </Accordion>
                     <br/><br/>
                     <div className='button-container'>
-                        <Button variant='outlined'>My links</Button>
+                        <Link to="/mylinks">
+                            <Button variant='outlined'>My links</Button>
+                        </Link>
                         <Button variant='contained' onClick={handleShorting} >Short</Button>
                     </div>
                 </div>

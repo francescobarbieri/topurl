@@ -170,6 +170,19 @@ a {
   position: absolute;
 }
 
+.mylinks-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.popover-mylinks {
+  padding: 1rem;
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+}
+
 @media screen and (max-width: 500px) {
   .flex-input {
     grid-template-columns: 1fr;
@@ -192,6 +205,13 @@ a {
     display: grid;
     grid-template-columns: 1fr 0.7214fr;
     gap: 3.125rem;
+  }
+
+  .mylinks-border-div {
+    width: calc(100% - 6.3rem);
+    padding: 3.125rem;
+    border: 1px solid rgba(0, 0, 0, 0.38);
+    border-radius: 4px;
   }
 
   .sidebar {

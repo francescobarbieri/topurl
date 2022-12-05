@@ -11,7 +11,7 @@ const Signup = () => {
     const passwordRef = useRef();
     const confirmPswRef = useRef();
 
-    const { signup, currentUser } = useAuth();
+    const { signup } = useAuth();
 
     const navigate = useNavigate();
 
